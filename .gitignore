@@ -1,0 +1,6 @@
+dist
+.env
+logs
+packer_cache
+iso
+artifacts
