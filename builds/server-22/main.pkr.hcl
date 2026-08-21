@@ -64,17 +64,17 @@ source "vmware-iso" "windows" {
 build {
   sources = ["source.vmware-iso.windows"]
 
-  # provisioner "windows-restart" {}
+  provisioner "windows-restart" {}
 
-  # provisioner "windows-update" {
-  #   search_criteria = "IsInstalled=0"
-  #   filters = [
-  #     "exclude:$_.Title -like '*Driver*'",
-  #     "exclude:$_.Title -like '*Preview*'",
-  #     "include:$true"
-  #   ]
-  #   update_limit = 10
-  # }
+  provisioner "windows-update" {
+    search_criteria = "IsInstalled=0"
+    filters = [
+      "exclude:$_.Title -like '*Driver*'",
+      "exclude:$_.Title -like '*Preview*'",
+      "include:$true"
+    ]
+    update_limit = 10
+  }
 
   provisioner "file" {
     content = templatefile("${path.cwd}/provision/configs/sysprep/server/unattend.xml.pkrtpl.hcl", {
