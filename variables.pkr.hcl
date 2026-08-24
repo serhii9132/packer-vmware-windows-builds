@@ -1,6 +1,6 @@
 locals {
     build_timestamp = formatdate("YYYY-MM-DD_hh-mm", timestamp())
-    artifacts_output_directory = "artifacts/${var.vm_name}/${local.build_timestamp}"
+    artifacts_output_directory = "${path.cwd}/artifacts/${var.vm_name}/${local.build_timestamp}"
 
     admin_password = textencodebase64("${var.winrm_password}AdministratorPassword", "UTF-16LE")
     logon_password = textencodebase64("${var.winrm_password}Password", "UTF-16LE")
@@ -8,15 +8,15 @@ locals {
     floppy_label = "cidata"
     
     floppy_content = {
-      "/autounattend.xml" = templatefile("./${local.floppy_label}/autounattend.xml.pkrtpl.hcl", {
+      "/autounattend.xml" = templatefile("${path.cwd}/autounattend/${var.vm_name}/autounattend.xml.pkrtpl.hcl", {
         admin_password = local.admin_password
         logon_password = local.logon_password
       })
     }
 
     floppy_files = [
-      "./provision/scripts/pre-build/install-vmware-tools.ps1",
-      "./provision/scripts/pre-build/configure-winrm.ps1"
+      "${path.cwd}/provision/scripts/pre-build/install-vmware-tools.ps1",
+      "${path.cwd}/provision/scripts/pre-build/configure-winrm.ps1"
     ]
 }
 
@@ -70,22 +70,26 @@ variable "cdrom_adapter_type" {
 
 variable "vm_name" {
   type = string
-  default = "win-11"
 }
 
 variable "os_version" {
   type = string
-  default = "windows11-64"
+}
+
+variable "os_type" {
+  type = string
 }
 
 variable "iso_checksum" {
   type = string
-  default = "none"
 }
 
 variable "iso_url" {
   type = string
-  default = "./iso/win-11-eval-eng.iso"
+}
+
+variable "iso_name" {
+  type = string
 }
 
 variable "tools_mode" {
@@ -106,4 +110,44 @@ variable "boot_command" {
 
 variable "shutdown_command" {
     type = string
+}
+
+variable "vnc_bind_address" {
+  type = string
+}
+
+variable "vnc_port_min" {
+  type = number
+}
+
+variable "vnc_port_max" {
+  type = number
+}
+
+variable "is_vnc_disable_password" {
+  type = bool
+}
+
+variable "winrm_username" {
+    type = string
+}
+
+variable "winrm_password" {
+    type = string
+}
+
+variable "winrm_port" {
+  type = number
+}
+
+variable "is_winrm_use_ssl" {
+  type = bool
+}
+
+variable "is_winrm_insecure" {
+  type = bool
+}
+
+variable "winrm_timeout" {
+  type = string
 }

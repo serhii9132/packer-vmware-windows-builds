@@ -1,6 +1,5 @@
-dist
-.env
+artifacts
+local.pkrvars.hcl
 logs
 packer_cache
 iso
-artifacts

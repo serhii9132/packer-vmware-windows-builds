@@ -1,4 +1,4 @@
-version = 21
+version = 22
 firmware = "efi"
 is_headless = true
 is_skip_export = true
@@ -14,6 +14,9 @@ cdrom_adapter_type = "sata"
 
 tools_mode = "attach"
 tools_source_path = "C:/Program Files (x86)/VMware/VMware Workstation/windows.iso"
+
+iso_checksum = "none"
+iso_url = "./iso"
 
 vnc_bind_address = "127.0.0.1"
 vnc_port_min = 5960

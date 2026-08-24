@@ -34,7 +34,7 @@ source "vmware-iso" "windows" {
   guest_os_type          = var.os_version
 
   iso_checksum           = var.iso_checksum
-  iso_url                = var.iso_url
+  iso_url                = "${var.iso_url}/${var.iso_name}"
   output_directory       = abspath("${local.artifacts_output_directory}")
 
   floppy_label           = local.floppy_label
@@ -77,7 +77,7 @@ build {
   }
 
   provisioner "file" {
-    content = templatefile("${path.cwd}/provision/configs/sysprep/desktop/unattend.xml.pkrtpl.hcl", {
+    content = templatefile("${path.cwd}/provision/configs/sysprep/${var.os_type}/unattend.xml.pkrtpl.hcl", {
       admin_password = local.admin_password
       logon_password = local.logon_password
     })
