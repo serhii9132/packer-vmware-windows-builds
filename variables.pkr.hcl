@@ -151,3 +151,7 @@ variable "is_winrm_insecure" {
 variable "winrm_timeout" {
   type = string
 }
+
+variable "is_winrm_use_ntlm" {
+    type = bool
+}

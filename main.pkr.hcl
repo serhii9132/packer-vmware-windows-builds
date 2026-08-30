@@ -55,6 +55,7 @@ source "vmware-iso" "windows" {
   winrm_use_ssl          = var.is_winrm_use_ssl
   winrm_insecure         = var.is_winrm_insecure
   winrm_timeout          = var.winrm_timeout
+  winrm_use_ntlm         = var.is_winrm_use_ntlm
 
   boot_wait              = var.boot_wait
   boot_command           = var.boot_command

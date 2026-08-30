@@ -27,6 +27,7 @@ winrm_username = "Administrator"
 winrm_port = 5986
 is_winrm_use_ssl = true
 is_winrm_insecure = true
+is_winrm_use_ntlm = true
 winrm_timeout = "2h"
 
 boot_wait = "2s"
